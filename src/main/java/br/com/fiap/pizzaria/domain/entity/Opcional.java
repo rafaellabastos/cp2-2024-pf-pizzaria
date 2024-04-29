@@ -21,8 +21,8 @@ public class Opcional {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "SQ_OPCIONAL")
-    @SequenceGenerator(name = "SQ_SABOR", sequenceName = "SQ_SABOR", allocationSize = 1)
-    @Column(name = "ID_SABOR")
+    @SequenceGenerator(name = "SQ_OPCIONAL", sequenceName = "SQ_OPCIONAL", allocationSize = 1)
+    @Column(name = "ID_OPCIONAL")
     private Long id;
 
     @Column(name = "NM_OPCIONAL")
