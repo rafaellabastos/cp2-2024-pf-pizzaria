@@ -1,4 +1,10 @@
 package br.com.fiap.pizzaria.domain.dto.response;
 
-public class SaborResponse {
-}
+import lombok.Builder;
+
+@Builder
+public record SaborResponse(
+   Long id,
+   String nome,
+   String descricao
+) {}
