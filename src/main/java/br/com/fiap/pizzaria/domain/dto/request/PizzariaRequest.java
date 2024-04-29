@@ -6,6 +6,8 @@ public record PizzariaRequest(
 
         @NotNull(message = "O nome é obrigatório")
         String nome,
+
+        @NotNull(message = "O cardápio é obrigatório")
         ProdutoRequest cardapio
 ) {
 }
