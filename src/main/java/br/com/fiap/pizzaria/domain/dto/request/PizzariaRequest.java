@@ -1,4 +1,11 @@
 package br.com.fiap.pizzaria.domain.dto.request;
 
-public record PizzariaRequest() {
+import jakarta.validation.constraints.NotNull;
+
+public record PizzariaRequest(
+
+        @NotNull(message = "O nome é obrigatório")
+        String nome,
+        ProdutoRequest cardapio
+) {
 }
