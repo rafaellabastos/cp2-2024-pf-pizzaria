@@ -18,7 +18,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "TB_PRODUTO", uniqueConstraints = {
-        @UniqueConstraint(name = "UK_PRODUTO_SABOR", columnNames = {"SABOR_PRODUTO"})
+        @UniqueConstraint(name = "UK_PRODUTO_SABOR", columnNames = {"SABOR"})
 })
 public class Produto {
 
@@ -41,14 +41,7 @@ public class Produto {
     )
     private Sabor sabor;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(
-            name = "PRECO",
-            referencedColumnName = "ID_PRECO",
-            foreignKey = @ForeignKey(
-                    name = "FK_PRECO_PRODUTO"
-            )
-    )
+    @Column(name = "PRECO_PRODUTO")
     private BigDecimal preco;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
@@ -66,7 +59,7 @@ public class Produto {
             inverseJoinColumns = {
                     @JoinColumn(
                             name = "OPCIONAIS",
-                            referencedColumnName = "ID_OPCIONAIS",
+                            referencedColumnName = "ID_OPCIONAl",
                             foreignKey = @ForeignKey(
                                     name = "FK_OPCIONAIS_PRODUTO"
                             )
