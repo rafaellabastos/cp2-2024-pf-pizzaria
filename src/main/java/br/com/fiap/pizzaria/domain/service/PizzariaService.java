@@ -2,14 +2,18 @@ package br.com.fiap.pizzaria.domain.service;
 
 import br.com.fiap.pizzaria.domain.dto.request.PizzariaRequest;
 import br.com.fiap.pizzaria.domain.dto.response.PizzariaResponse;
+import br.com.fiap.pizzaria.domain.dto.response.ProdutoResponse;
 import br.com.fiap.pizzaria.domain.entity.Pizzaria;
+import br.com.fiap.pizzaria.domain.entity.Produto;
 import br.com.fiap.pizzaria.domain.repository.PizzariaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Service
 public class PizzariaService implements ServiceDTO<Pizzaria, PizzariaRequest, PizzariaResponse>{
@@ -33,12 +37,12 @@ public class PizzariaService implements ServiceDTO<Pizzaria, PizzariaRequest, Pi
     public PizzariaResponse toResponse(Pizzaria e) {
 
         if (Objects.isNull(e)) return null;
-        var produto = produtoService.toResponse(e.getCardapio());
+        Set<ProdutoResponse> cardapio = new LinkedHashSet<>();
 
         return PizzariaResponse.builder()
                 .id(e.getId())
                 .nome(e.getNome())
-                .cardapio(produto)
+                .cardapio(cardapio)
                 .build();
     }
 

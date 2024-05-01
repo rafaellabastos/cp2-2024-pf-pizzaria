@@ -1,8 +1,11 @@
 package br.com.fiap.pizzaria.domain.service;
 
 import br.com.fiap.pizzaria.domain.dto.request.ProdutoRequest;
+import br.com.fiap.pizzaria.domain.dto.response.OpcionalResponse;
 import br.com.fiap.pizzaria.domain.dto.response.ProdutoResponse;
+import br.com.fiap.pizzaria.domain.entity.Opcional;
 import br.com.fiap.pizzaria.domain.entity.Produto;
+import br.com.fiap.pizzaria.domain.entity.Sabor;
 import br.com.fiap.pizzaria.domain.repository.ProdutoRepository;
 import br.com.fiap.pizzaria.domain.repository.SaborRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +13,8 @@ import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Service
 public class ProdutoService implements ServiceDTO<Produto, ProdutoRequest, ProdutoResponse>{
@@ -25,21 +30,24 @@ public class ProdutoService implements ServiceDTO<Produto, ProdutoRequest, Produ
 
     @Override
     public Produto toEntity(ProdutoRequest dto) {
-//        var sabor = saborService.toEntity(dto.sabor());
-//        var opcionais = opcionalService.toEntity(dto.opcional());
+
+        Sabor sabor = null;
+
+        sabor = saborService.findById(dto.sabor().id());
+        Set<Opcional> opcionais = new LinkedHashSet<>();
 
         return Produto.builder()
                 .nome(dto.nome())
                 .preco(dto.preco())
-//                .sabor(sabor)
-//                .opcionais(opcionais)
+                .sabor(sabor)
+                .opcionais(opcionais)
                 .build();
     }
 
     @Override
     public ProdutoResponse toResponse(Produto e) {
         var sabor = saborService.toResponse(e.getSabor());
-        var opcionais = opcionalService.toResponse(e.getOpcionais());
+        Set<OpcionalResponse> opcionais = new LinkedHashSet<>();
 
         return ProdutoResponse.builder()
                 .id(e.getId())
@@ -61,7 +69,7 @@ public class ProdutoService implements ServiceDTO<Produto, ProdutoRequest, Produ
 
     @Override
     public Produto findById(Long id) {
-        return repo.findById(id);
+        return repo.findById(id).orElse(null);
     }
 
     @Override

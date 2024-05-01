@@ -44,7 +44,7 @@ public class SaborService implements ServiceDTO<Sabor, SaborRequest, SaborRespon
 
     @Override
     public Sabor findById(Long id) {
-        return repo.findById(id);
+        return repo.findById(id).orElse(null);
     }
 
     @Override
