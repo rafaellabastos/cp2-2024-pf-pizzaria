@@ -33,12 +33,12 @@ public class PizzariaService implements ServiceDTO<Pizzaria, PizzariaRequest, Pi
     public PizzariaResponse toResponse(Pizzaria e) {
 
         if (Objects.isNull(e)) return null;
-//        var produto = produtoService.toResponse(e.getCardapio());
+        var produto = produtoService.toResponse(e.getCardapio());
 
         return PizzariaResponse.builder()
                 .id(e.getId())
                 .nome(e.getNome())
-//                .cardapio(produto)
+                .cardapio(produto)
                 .build();
     }
 

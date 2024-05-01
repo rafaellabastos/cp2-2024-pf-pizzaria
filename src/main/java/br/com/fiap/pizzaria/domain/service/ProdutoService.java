@@ -14,11 +14,11 @@ import java.util.Collection;
 @Service
 public class ProdutoService implements ServiceDTO<Produto, ProdutoRequest, ProdutoResponse>{
 
-//    @Autowired
-//    private SaborService saborService;
-//
-//    @Autowired
-//    private OpcionalService opcionalService;
+    @Autowired
+    private SaborService saborService;
+
+    @Autowired
+    private OpcionalService opcionalService;
 
     @Autowired
     private ProdutoRepository repo;
@@ -38,15 +38,15 @@ public class ProdutoService implements ServiceDTO<Produto, ProdutoRequest, Produ
 
     @Override
     public ProdutoResponse toResponse(Produto e) {
-//        var sabor = saborService.toResponse(e.getSabor());
-//        var opcionais = opcionalService.toResponse(e.getOpcionais());
+        var sabor = saborService.toResponse(e.getSabor());
+        var opcionais = opcionalService.toResponse(e.getOpcionais());
 
         return ProdutoResponse.builder()
                 .id(e.getId())
                 .nome(e.getNome())
                 .preco(e.getPreco())
-//                .sabor(sabor)
-//                .opcionais(opcionais)
+                .sabor(sabor)
+                .opcionais(opcionais)
                 .build();
     }
     @Override
@@ -61,7 +61,7 @@ public class ProdutoService implements ServiceDTO<Produto, ProdutoRequest, Produ
 
     @Override
     public Produto findById(Long id) {
-        return null;//repo.findById(id);
+        return repo.findById(id);
     }
 
     @Override
