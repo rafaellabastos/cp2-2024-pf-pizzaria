@@ -42,18 +42,11 @@ public class PizzariaResource implements ResourceDTO<PizzariaRequest, PizzariaRe
             @RequestParam(name = "produto.nome", required = false) String nomeProduto,
             @RequestParam(name = "produto.preco", required = false) BigDecimal precoProduto
             ){
-        Produto produto = null;
-        if (Objects.nonNull(idProduto) && idProduto > 0){
-            produto = produtoRepository.findById(idProduto).orElse(null);
-        }
-
-        else {
-            produto = Produto.builder()
+            Produto produto = Produto.builder()
                     .nome(nomeProduto)
                     .preco(precoProduto)
                     .build();
 
-        }
 
         Set<Produto> cardapio = new LinkedHashSet<>();
         cardapio.add(produto);
